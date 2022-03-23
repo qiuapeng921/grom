@@ -62,7 +62,7 @@ func ({{ .ShortStructName }} *{{ .StructName }}) TableUnique() [][]string {
 
 const gormTemplate = `gorm:"
 	{{- if .IsPrimaryKey }}primary_key;{{ end -}}
-	column:{{ .Name }};type:{{ .Type }}{{ if .IsAutoIncrement }} auto_increment{{ end }}
+	column:{{ .Name }};type:{{ .Type }}{{ if .IsAutoIncrement }};autoIncrement{{ end }}
 	{{- if or .IsNullable .IsPrimaryKey | not }};not null{{ end -}}
 	{{- range $i, $v := .Indexes }}
 		{{- if eq $i 0 }};index:{{ $v.Name }}{{ else }},{{ $v.Name }}{{ end }}{{ end -}}
@@ -94,7 +94,7 @@ const beegoTemplate = `orm:"
 
 const gormV2Template = `gorm:"
 	{{- if .IsPrimaryKey }}primaryKey;{{ end -}}
-	column:{{ .Name }};type:{{ .Type }}{{ if .IsAutoIncrement }} auto_increment{{ end }}
+	column:{{ .Name }};type:{{ .Type }}{{ if .IsAutoIncrement }};autoIncrement{{ end }}
 	{{- if or .IsNullable .IsPrimaryKey | not }};not null{{ end -}}
 	{{- range $i, $v := .Indexes }}
 		{{- if eq $i 0 }};index:{{ $v.Name }}{{ else }},{{ $v.Name }}{{ end }}{{ end -}}
